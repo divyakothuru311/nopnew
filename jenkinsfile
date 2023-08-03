@@ -9,7 +9,7 @@ pipeline{
     stages {
         stage('git vcs') {
             steps {
-                git url: 'https://github.com/divyakothuru311/nopCommerce-july23.git',
+                git url: 'https://github.com/divyakothuru311/nopnew.git',
                     branch: 'develop'
             }
         }
