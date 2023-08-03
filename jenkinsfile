@@ -1,0 +1,47 @@
+pipeline{
+    agent { label 'dotnet-sdk-7.0'}
+    options {
+         timeout(time: 30, unit: 'MINUTES')
+    }
+    triggers {
+        pollSCM('* * * * *') 
+    }
+    stages {
+        stage('git vcs') {
+            steps {
+                git url: 'https://github.com/divyakothuru311/nopCommerce-july23.git',
+                    branch: 'develop'
+            }
+        }
+
+        stage('build and package') {
+            steps {
+                rtDotnetResolver(
+                    id: "DOTNET_RESOLVER",
+                    serverId: "JFROG_NOP",
+                    repo: "nop-nuget-local"
+                )
+            }
+        }
+
+        stage ('Exec build') {
+            steps {
+                rtDotnetRun (
+                    resolverId: "DOTNET_RESOLVER",
+                    args: "build src/NopCommerce.sln"
+                )
+            }
+        }
+
+        stage ('Publish build info') {
+            steps {
+                rtPublishBuildInfo (
+                    serverId: "JFROG_NOP"
+                )
+            }
+        }            
+    }
+
+}    
+        
+        
