@@ -24,17 +24,14 @@ pipeline{
                     serverId: "JFROG_NOP",
                     repo: "nop-nuget-local"
                 )
-            }
-        }
-
-        stage ('Exec build') {
-            steps {
                 rtDotnetRun (
                     resolverId: "DOTNET_RESOLVER",
                     args: "build src/NopCommerce.sln"
-                )
+                )    
             }
         }
+
+       
 
         stage ('Publish build info') {
             steps {
