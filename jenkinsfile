@@ -25,8 +25,9 @@ pipeline{
                     repo: "nop-nuget-local"
                 )
                 rtDotnetRun (
-                    resolverId: "DOTNET_RESOLVER",
-                    args: "build src/NopCommerce.sln"
+                    args: "build src/NopCommerce.sln",
+                    resolverId: "DOTNET_RESOLVER"
+                    
                 )    
             }
         }
