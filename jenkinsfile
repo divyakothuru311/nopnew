@@ -21,7 +21,7 @@ pipeline{
             steps {
                 rtDotnetResolver(
                     id: "DOTNET_RESOLVER",
-                    serverId: "JFROG_NOP",
+                    serverId: "newinstance",
                     repo: "nop-nuget-local"
                 )
                 rtDotnetRun (
@@ -36,7 +36,7 @@ pipeline{
         stage ('Publish build info') {
             steps {
                 rtPublishBuildInfo (
-                    serverId: "JFROG_NOP"
+                    serverId: "newinstance"
                 )
             }
         }            
